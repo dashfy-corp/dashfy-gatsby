@@ -1,0 +1,4 @@
+FROM dashfy/gatsby-docker:onbuild as build
+FROM gatsbyjs/gatsby
+
+COPY --from=build /app/public /pub
