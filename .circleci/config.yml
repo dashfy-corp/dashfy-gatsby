@@ -80,19 +80,20 @@ workflows:
   deploy:
     jobs:
       - preload:
-          context: $ENVIRONMENT_CONTEXT
+          context: "${ENVIRONMENT_CONTEXT}"
       - lint:
           requires:
             - preload
       - test:
+          context: "${ENVIRONMENT_CONTEXT}"
           requires:
             - preload
             - lint
       - build:
-          context: Dashfy App
+          context: "${ENVIRONMENT_CONTEXT}"
           requires:
             - test
       - deploy:
-          context: Dashfy App
+          context: "${ENVIRONMENT_CONTEXT}"
           requires:
             - build
