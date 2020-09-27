@@ -35,6 +35,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - restore_cache: *restore_dependencies
       - run:
           name: "Linting..."
           command: npm run lint
@@ -43,6 +44,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - restore_cache: *restore_dependencies
       - run:
           name: "Testing..."
           command: npm run test
