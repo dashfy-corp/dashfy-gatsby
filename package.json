@@ -59,11 +59,11 @@
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop -H 0.0.0.0 -p 8383",
+    "develop": "gatsby develop -H ${UI_HOST} -p ${UI_PORT}",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx,json}\"",
     "lint:fix": "eslint --fix \"**/*.{js,jsx,ts,tsx,json}\"",
     "start": "npm run develop",
-    "serve": "gatsby serve",
+    "serve": "gatsby serve -H ${UI_HOST} -p ${UI_PORT}",
     "clean": "gatsby clean",
     "flow": "flow",
     "test": "jest --passWithNoTests --testPathPattern=src",

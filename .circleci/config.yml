@@ -74,13 +74,13 @@ jobs:
       - cloudrun/deploy:
           image: 'us.gcr.io/${GOOGLE_PROJECT_ID}/dashfy/frontend:latest'
           region: '${GOOGLE_COMPUTE_ZONE}'
-          service-name: dashfy-frontend
+          service-name: dashfy-frontend-${ENVIRONMENT}
 
 workflows:
   deploy:
     jobs:
       - preload:
-          context: Dashfy App
+          context: $ENVIRONMENT_CONTEXT
       - lint:
           requires:
             - preload
