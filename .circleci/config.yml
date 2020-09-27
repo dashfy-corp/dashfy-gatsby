@@ -1,14 +1,19 @@
 version: 2.1
 
+parameters:
+  environment_context:
+    type: string
+    default: 'Dashfy App'
+
 restore_dependencies: &restore_dependencies
-  name: "Restoring dependencies from cache..."
+  name: 'Restoring dependencies from cache...'
   keys:
-    - npm-deps-{{ checksum "package-lock.json" }}
+    - npm-deps-{{ checksum 'package-lock.json' }}
 
 defaults: &defaults
   working_directory: ~/app
   docker:
-    - image: "circleci/node:10.16.0"
+    - image: 'circleci/node:10.16.0'
       auth:
         username: $DOCKERHUB_USERNAME
         password: $DOCKERHUB_PASSWORD
@@ -23,11 +28,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Installing dependencies..."
+          name: 'Installing dependencies...'
           command: npm ci
 
       - save_cache:
-          key: npm-deps-{{ checksum "package-lock.json" }}
+          key: npm-deps-{{ checksum 'package-lock.json' }}
           paths:
             - node_modules
 
@@ -37,7 +42,7 @@ jobs:
       - checkout
       - restore_cache: *restore_dependencies
       - run:
-          name: "Linting..."
+          name: 'Linting...'
           command: npm run lint
 
   test:
@@ -46,7 +51,7 @@ jobs:
       - checkout
       - restore_cache: *restore_dependencies
       - run:
-          name: "Testing..."
+          name: 'Testing...'
           command: npm run test
 
   build:
@@ -80,20 +85,20 @@ workflows:
   deploy:
     jobs:
       - preload:
-          context: "${ENVIRONMENT_CONTEXT}"
+          context: '<< pipeline.parameters.environment_context >>'
       - lint:
           requires:
             - preload
       - test:
-          context: "${ENVIRONMENT_CONTEXT}"
+          context: '<< pipeline.parameters.environment_context >>'
           requires:
             - preload
             - lint
       - build:
-          context: "${ENVIRONMENT_CONTEXT}"
+          context: '<< pipeline.parameters.environment_context >>'
           requires:
             - test
       - deploy:
-          context: "${ENVIRONMENT_CONTEXT}"
+          context: '<< pipeline.parameters.environment_context >>'
           requires:
             - build
