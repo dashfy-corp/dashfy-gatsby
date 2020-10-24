@@ -3,20 +3,31 @@ import PropTypes from 'prop-types'
 import { Col, Container, Row, Button } from 'reactstrap'
 import { darkModeTypes } from '../../types'
 import { darkModeClassNames } from '../../untils'
+import { Title, SubTitle } from '../styles'
 
 const Section = ({ darkMode, title, description, action, children }) => (
   <div
     className={darkModeClassNames(darkMode, {
       section: true,
-      'text-center': true
+      'text-center': true,
+      'extra-space': true
     })}
   >
     <Container>
       <Row>
-        <Col className="ml-auto mr-auto" md="8">
-          <h2 className="title">{title}</h2>
-          <h5 className="description">{description}</h5>
-          <br />
+        <Col className="mx-auto" xs="10" sm="12" lg="10">
+          {title && (
+            <>
+              <Title tag="h2">{title}</Title>
+              {!description && <br />}
+            </>
+          )}
+          {description && (
+            <>
+              <SubTitle>{description}</SubTitle>
+              <br />
+            </>
+          )}
           {action && (
             <Button
               className="btn-round"
@@ -29,7 +40,6 @@ const Section = ({ darkMode, title, description, action, children }) => (
           )}
         </Col>
       </Row>
-      <br />
       <br />
       {children && <Row>{children}</Row>}
     </Container>

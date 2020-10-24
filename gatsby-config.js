@@ -8,7 +8,10 @@ const config = {
   siteMetadata: {
     title: `A Title`,
     description: `A punch line about your products and services!`,
-    author: `@dashfy`
+    author: `@dashfy`,
+    styles: {
+      fontFamily: ''
+    }
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -48,8 +51,14 @@ const config = {
         icon: `src/assets/images/gatsby-icon.png` // This path is relative to the root of the site.
       }
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /\.svg$/
+        }
+      }
+    },
     `gatsby-plugin-offline`
   ]
 }

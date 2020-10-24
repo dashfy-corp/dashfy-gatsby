@@ -71,7 +71,7 @@ function SEO({ description, lang, meta, title }) {
       link={[
         {
           href:
-            'https://fonts.googleapis.com/css?family=Montserrat:400,700,200',
+            'https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700',
           rel: 'stylesheet'
         },
         {

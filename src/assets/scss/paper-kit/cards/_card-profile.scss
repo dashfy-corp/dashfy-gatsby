@@ -20,6 +20,7 @@
   }
 
   .card-avatar {
+    width: 100%;
     max-width: 120px;
     max-height: 120px;
     margin: -60px auto 0;
@@ -33,7 +34,6 @@
         border: 4px solid $card-muted-color;
     }
   }
-
 }
 
 .section {

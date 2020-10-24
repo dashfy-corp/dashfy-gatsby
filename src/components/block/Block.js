@@ -1,31 +1,41 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button } from 'reactstrap'
-import { iconClassNames } from '../../untils'
+import styled from 'styled-components'
+import Icon from '../icon/Icon'
+import { Box, Description, LinkButton, Title } from '../styles'
+
+const BlockBox = styled(Box)`
+  .title {
+    margin-bottom: 5px;
+  }
+
+  @media (max-width: 768px) {
+    margin: 80px 40px 0 40px;
+  }
+`
+
+const IconContainer = styled.div`
+  font-size: 24px;
+`
 
 const Block = ({ icon, theme, title, description, action }) => (
-  <div className="info">
+  <BlockBox direction="column" margin="40px 0">
     {icon && (
-      <div className={`icon icon-${theme}`} data-testid="block-icon">
-        <i className={iconClassNames(icon)} />
-      </div>
+      <IconContainer data-testid="block-icon">
+        <Icon {...{ size: '3x', ...icon }} />
+      </IconContainer>
     )}
-    <div className="description">
+    <div>
       {title && (
-        <>
-          <h4 className={`${theme}-title`} data-testid="block-title">
-            {title}
-          </h4>
-          <br />
-        </>
+        <Title tag="h4" data-testid="block-title">
+          {title}
+        </Title>
       )}
       {description && (
-        <p className="description" data-testid="block-description">
-          {description}
-        </p>
+        <Description data-testid="block-description">{description}</Description>
       )}
       {action ? (
-        <Button
+        <LinkButton
           data-testid="block-action"
           className="btn-link"
           color={theme}
@@ -33,10 +43,10 @@ const Block = ({ icon, theme, title, description, action }) => (
           onClick={action.callback}
         >
           {action.label}
-        </Button>
+        </LinkButton>
       ) : null}
     </div>
-  </div>
+  </BlockBox>
 )
 
 Block.propTypes = {
@@ -44,7 +54,10 @@ Block.propTypes = {
     alt: PropTypes.string,
     src: PropTypes.string
   }),
-  icon: PropTypes.string,
+  icon: PropTypes.shape({
+    icon: PropTypes.object,
+    size: PropTypes.string
+  }),
   theme: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
@@ -57,7 +70,7 @@ Block.propTypes = {
 
 Block.defaultProps = {
   image: null,
-  icon: 'nc-album-2',
+  icon: null,
   theme: 'info',
   title: null,
   description: null,

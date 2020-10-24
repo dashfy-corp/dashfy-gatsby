@@ -5,6 +5,21 @@ import { darkModeTypes } from '../../../types'
 import Block from '../../block/Block'
 import Section from '../../section/Section'
 
+/**
+ * Services Section Component
+ *
+ * Custom section to display a variety of services, each service
+ * can have it's own icon along with title and description and
+ * optional action button's.
+ *
+ * @param darkMode
+ * @param title
+ * @param description
+ * @param action
+ * @param services
+ * @return {*}
+ * @constructor
+ */
 const ServicesSection = ({
   darkMode,
   title,
@@ -49,6 +64,10 @@ ServicesSection.propTypes = {
       description: PropTypes.string,
       color: PropTypes.string,
       size: PropTypes.number,
+      icon: PropTypes.shape({
+        icon: PropTypes.object,
+        size: PropTypes.string
+      }),
       action: PropTypes.shape({
         label: PropTypes.string,
         url: PropTypes.string,

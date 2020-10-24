@@ -1,11 +1,16 @@
 FROM node:12.13
 
+ARG ENVIRONMENT
+ARG UI_PORT
+
 WORKDIR /usr/source/app
 
 COPY package*.json ./
 
-RUN npm i
+ENV NODE_ENV $ENVIRONMENT
 
-EXPOSE 8383
+RUN npm ci
+
+EXPOSE $UI_PORT
 
 CMD ["npm", "run", "develop"]

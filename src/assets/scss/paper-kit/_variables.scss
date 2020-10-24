@@ -1,3 +1,8 @@
+$breakpoint-xs:              0;
+$breakpoint-sm:              576px;
+$breakpoint-md:              768px;
+$breakpoint-lg:              992px;
+$breakpoint-xl:              1200px;
 $font-color:                 #66615b !default;
 $fill-font-color:            rgba(255, 255, 255, 0.8);
 $font-family-sans-serif:     'Montserrat', "Helvetica", Arial, sans-serif;
@@ -150,7 +155,7 @@ $font-size-info-horizontal:    2.5em !default;
 $font-weight-light:          300 !default;
 $font-weight-normal:         400 !default;
 $font-weight-semi:           500 !default;
-$font-weight-bold:           600 !default;
+$font-weight-bold:           700 !default;
 
 $line-height-small:            20px !default;
 $line-height-general:          1.5em !default;
