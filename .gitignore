@@ -6,6 +6,7 @@
 .pnp.js
 /.cache
 /backup
+/public
 
 # testing
 /coverage

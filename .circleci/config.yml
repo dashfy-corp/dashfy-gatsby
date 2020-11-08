@@ -81,22 +81,31 @@ jobs:
           service-name: dashfy-frontend-${ENVIRONMENT}
 
 workflows:
-  deploy:
+  test:
     jobs:
       - preload:
           context: '<< pipeline.parameters.environment_context >>'
+          filters:
+            branches:
+              only: master
+
       - lint:
           requires:
             - preload
+
       - test:
           context: '<< pipeline.parameters.environment_context >>'
           requires:
-            - preload
             - lint
+
+  deploy:
+    jobs:
       - build:
           context: '<< pipeline.parameters.environment_context >>'
-          requires:
-            - test
+          filters:
+            tags:
+              only: /v.*/
+
       - deploy:
           context: '<< pipeline.parameters.environment_context >>'
           requires:
