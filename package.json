@@ -1,5 +1,5 @@
 {
-  "name": "dashfy-default-template",
+  "name": "dashfy-frontend",
   "private": true,
   "description": "The default template for new Dashfy appplications.",
   "version": "0.1.0",
