@@ -75,8 +75,7 @@ function SEO({ description, lang, meta, title }) {
           rel: 'stylesheet'
         },
         {
-          href:
-            'https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css',
+          href: 'https://use.fontawesome.com/releases/v5.7.1/css/all.css',
           rel: 'stylesheet'
         }
       ]}
