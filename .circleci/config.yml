@@ -29,7 +29,7 @@ jobs:
       - checkout
       - run:
           name: 'Installing dependencies...'
-          command: npm ci --only=production
+          command: npm ci
       - save_cache:
           key: npm-deps-{{ checksum "package-lock.json" }}
           paths:
@@ -85,9 +85,6 @@ workflows:
     jobs:
       - preload:
           context: '<< pipeline.parameters.environment_context >>'
-          filters:
-            branches:
-              only: master
 
       - lint:
           requires:
@@ -100,11 +97,16 @@ workflows:
 
   deploy:
     jobs:
+      - preload:
+          context: '<< pipeline.parameters.environment_context >>'
+
       - build:
           context: '<< pipeline.parameters.environment_context >>'
           filters:
             tags:
               only: /v.*/
+          requires:
+            - preload
 
       - deploy:
           context: '<< pipeline.parameters.environment_context >>'
