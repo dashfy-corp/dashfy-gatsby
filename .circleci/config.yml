@@ -85,36 +85,51 @@ workflows:
     jobs:
       - preload:
           context: '<< pipeline.parameters.environment_context >>'
+          filters:
+            tags:
+              ignore: /.*/
 
       - lint:
           requires:
             - preload
+          filters:
+            tags:
+              ignore: /.*/
 
       - test:
           context: '<< pipeline.parameters.environment_context >>'
           requires:
             - lint
+          filters:
+            tags:
+              ignore: /.*/
 
   deploy:
     jobs:
       - preload:
           context: '<< pipeline.parameters.environment_context >>'
           filters:
+            branches:
+              ignore: /.*/
             tags:
-              only: /v.*/
+              only: /^v.*/
 
       - build:
           context: '<< pipeline.parameters.environment_context >>'
           requires:
             - preload
           filters:
+            branches:
+              ignore: /.*/
             tags:
-              only: /v.*/
+              only: /^v.*/
 
       - deploy:
           context: '<< pipeline.parameters.environment_context >>'
           requires:
             - build
           filters:
+            branches:
+              ignore: /.*/
             tags:
-              only: /v.*/
+              only: /^v.*/
