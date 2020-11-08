@@ -42,7 +42,9 @@ jobs:
       - restore_cache: *restore_dependencies
       - run:
           name: 'Linting...'
-          command: npm run lint
+          command: |
+            npm i
+            npm run lint
 
   test:
     <<: *defaults
@@ -51,7 +53,9 @@ jobs:
       - restore_cache: *restore_dependencies
       - run:
           name: 'Testing...'
-          command: npm run test
+          command: |
+            npm i
+            npm run test
 
   build:
     executor: gcp-gcr/default
