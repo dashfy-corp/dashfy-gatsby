@@ -99,16 +99,22 @@ workflows:
     jobs:
       - preload:
           context: '<< pipeline.parameters.environment_context >>'
-
-      - build:
-          context: '<< pipeline.parameters.environment_context >>'
           filters:
             tags:
               only: /v.*/
+
+      - build:
+          context: '<< pipeline.parameters.environment_context >>'
           requires:
             - preload
+          filters:
+            tags:
+              only: /v.*/
 
       - deploy:
           context: '<< pipeline.parameters.environment_context >>'
           requires:
             - build
+          filters:
+            tags:
+              only: /v.*/
