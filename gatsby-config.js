@@ -25,6 +25,18 @@ const config = {
       }
     },
     {
+      resolve: `gatsby-alias-imports`,
+      options: {
+        aliases: {
+          assets: `src/assets`,
+          components: `src/components`,
+          pages: `src/pages`,
+          views: `src/views`,
+          variables: `src/variables`,
+        }
+      }
+    },
+    {
       resolve: 'gatsby-source-strapi',
       options: {
         apiURL: process.env.API_URL,
@@ -35,6 +47,14 @@ const config = {
           // "blocks"
         ],
         queryLimit: 1000
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Droid Sans', 'Droid Serif']
+        }
       }
     },
     `gatsby-transformer-sharp`,

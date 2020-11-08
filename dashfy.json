@@ -1,0 +1,14 @@
+{
+    "name": "default",
+    "path": "G:\\APPS\\SCAFOLDING\\dashfy-app-template\\ui-themes\\default",
+    "files": [
+        ".eslintignore",
+        ".eslintrc.js",
+        ".gitignore",
+        ".prettierignore",
+        ".prettierrc",
+        "dashfy.json",
+        "package.json",
+        "src"
+    ]
+}
