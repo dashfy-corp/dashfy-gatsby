@@ -1,5 +1,5 @@
 {
-  "name": "dashfy-frontend",
+  "name": "@dashfy/default-ui",
   "private": true,
   "description": "The default template for new Dashfy appplications.",
   "version": "0.1.0",
