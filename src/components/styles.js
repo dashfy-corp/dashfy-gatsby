@@ -56,28 +56,35 @@ export const FullButton = styled(Button)`
 
 export const Title = compose(
   defaultProps({
-    tag: 'h4'
+    tag: 'h4',
+    testIdPrefix: ''
   })
-)(({ tag, children }) => {
+)(({ tag, testIdPrefix, children }) => {
+  const testId = `${testIdPrefix ? `${testIdPrefix}-` : ''}title`
+  const tagProps = { className: testId, 'data-testid': testId };
   switch (tag) {
     case 'h1':
-      return <h1 className="title">{children}</h1>
+      return <h1 {...tagProps}>{children}</h1>
     case 'h2':
-      return <h2 className="title">{children}</h2>
+      return <h2 {...tagProps}>{children}</h2>
     case 'h3':
-      return <h3 className="title">{children}</h3>
+      return <h3 {...tagProps}>{children}</h3>
     default:
-      return <h4 className="title">{children}</h4>
+      return <h4 {...tagProps}>{children}</h4>
   }
 })
 
-export const SubTitle = compose()(({ children }) => (
-  <h5 className="description">{children}</h5>
-))
+export const SubTitle = compose()(({ testIdPrefix, children }) => {
+  const testId = `${testIdPrefix ? `${testIdPrefix}-` : ''}sub-title`
+  const tagProps = { className: testId, 'data-testid': testId };
+  return <h5 {...tagProps}>{children}</h5>
+})
 
-export const Description = compose()(({ children }) => (
-  <p className="description">{children}</p>
-))
+export const Description = compose()(({ testIdPrefix, children }) => {
+  const testId = `${testIdPrefix ? `${testIdPrefix}-` : ''}description`
+  const tagProps = { className: testId, 'data-testid': testId };
+  return <p {...tagProps}>{children}</p>
+})
 
 export const LinkButton = compose()(({ children, ...props }) => (
   <Button className="btn-link" {...props}>

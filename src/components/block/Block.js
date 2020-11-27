@@ -27,12 +27,12 @@ const Block = ({ icon, theme, title, description, action }) => (
     )}
     <div>
       {title && (
-        <Title tag="h4" data-testid="block-title">
+        <Title tag="h4" testIdPrefix="block">
           {title}
         </Title>
       )}
       {description && (
-        <Description data-testid="block-description">{description}</Description>
+        <Description testIdPrefix="block">{description}</Description>
       )}
       {action ? (
         <LinkButton
