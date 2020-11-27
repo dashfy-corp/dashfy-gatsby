@@ -7,7 +7,6 @@ import GallerySection from '../components/sections/gallery/GallerySection'
 import ServicesSection from '../components/sections/services/ServicesSection'
 import SplitSection from '../components/sections/split/SplitSection'
 import EmployeesSection from '../components/sections/employees/EmployeesSection'
-import SEO from '../components/seo'
 import { Box } from '../components/styles'
 import { beachBlueSky, darkBlue } from '../gradients'
 import EnvelopeIcon from '../assets/svg/envelope-open.svg'
@@ -86,7 +85,6 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <SEO title="Home" />
       <Hero
         title={siteMetadata.title}
         description={siteMetadata.description}

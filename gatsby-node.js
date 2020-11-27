@@ -17,6 +17,9 @@ exports.onCreateWebpackConfig = ({ actions }) => {
         "assets": path.resolve(__dirname, "src/assets"),
         "variables": path.resolve(__dirname, "src/variables")
       }
+    },
+    externals: {
+      jquery: 'jQuery', // important: 'Q' capitalized
     }
   });
 };

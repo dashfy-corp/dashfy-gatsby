@@ -15,6 +15,7 @@ const config = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-json`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-flow`,
     {
@@ -22,6 +23,13 @@ const config = {
       options: {
         name: `assets`,
         path: path.join(__dirname, `src`, `assets`)
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: path.join(__dirname, `src`, `data`)
       }
     },
     {
