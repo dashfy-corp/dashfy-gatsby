@@ -61,7 +61,7 @@ export const Title = compose(
   })
 )(({ tag, testIdPrefix, children }) => {
   const testId = `${testIdPrefix ? `${testIdPrefix}-` : ''}title`
-  const tagProps = { className: testId, 'data-testid': testId };
+  const tagProps = { className: testId, 'data-testid': testId }
   switch (tag) {
     case 'h1':
       return <h1 {...tagProps}>{children}</h1>
@@ -76,13 +76,13 @@ export const Title = compose(
 
 export const SubTitle = compose()(({ testIdPrefix, children }) => {
   const testId = `${testIdPrefix ? `${testIdPrefix}-` : ''}sub-title`
-  const tagProps = { className: testId, 'data-testid': testId };
+  const tagProps = { className: testId, 'data-testid': testId }
   return <h5 {...tagProps}>{children}</h5>
 })
 
 export const Description = compose()(({ testIdPrefix, children }) => {
   const testId = `${testIdPrefix ? `${testIdPrefix}-` : ''}description`
-  const tagProps = { className: testId, 'data-testid': testId };
+  const tagProps = { className: testId, 'data-testid': testId }
   return <p {...tagProps}>{children}</p>
 })
 

@@ -6,6 +6,7 @@
 .pnp.js
 /.cache
 /backup
+/public
 
 # testing
 /coverage
@@ -15,7 +16,6 @@
 
 # misc
 .DS_Store
-.eslintcache
 .env.local
 .env.development.local
 .env.test.local
