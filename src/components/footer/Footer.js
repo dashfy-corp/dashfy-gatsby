@@ -17,10 +17,10 @@
 
 */
 /*eslint-disable*/
-import React from "react";
+import React from 'react'
 
 // reactstrap components
-import { Row, Container } from "reactstrap";
+import { Row, Container } from 'reactstrap'
 
 function Footer() {
   return (
@@ -57,14 +57,14 @@ function Footer() {
           </nav>
           <div className="credits ml-auto">
             <span className="copyright">
-              © {new Date().getFullYear()}, made with{" "}
+              © {new Date().getFullYear()}, made with{' '}
               <i className="fa fa-heart heart" /> by Creative Tim
             </span>
           </div>
         </Row>
       </Container>
     </footer>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

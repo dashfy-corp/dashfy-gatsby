@@ -1,11 +1,4 @@
 {
-  "extends": [
-    "plugin:prettier/recommended",
-    "prettier/babel",
-    "prettier/flowtype",
-    "prettier/react",
-    "prettier/standard"
-  ],
   "arrowParens": "avoid",
   "singleQuote": true,
   "semi": false,

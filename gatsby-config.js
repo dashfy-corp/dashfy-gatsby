@@ -8,10 +8,14 @@ const config = {
   siteMetadata: {
     title: `A Title`,
     description: `A punch line about your products and services!`,
-    author: `@dashfy`
+    author: `@dashfy`,
+    styles: {
+      fontFamily: ''
+    }
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-json`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-flow`,
     {
@@ -19,6 +23,25 @@ const config = {
       options: {
         name: `assets`,
         path: path.join(__dirname, `src`, `assets`)
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: path.join(__dirname, `src`, `data`)
+      }
+    },
+    {
+      resolve: `gatsby-alias-imports`,
+      options: {
+        aliases: {
+          assets: `src/assets`,
+          components: `src/components`,
+          pages: `src/pages`,
+          views: `src/views`,
+          variables: `src/variables`,
+        }
       }
     },
     {
@@ -32,6 +55,14 @@ const config = {
           // "blocks"
         ],
         queryLimit: 1000
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Droid Sans', 'Droid Serif']
+        }
       }
     },
     `gatsby-transformer-sharp`,
@@ -48,8 +79,14 @@ const config = {
         icon: `src/assets/images/gatsby-icon.png` // This path is relative to the root of the site.
       }
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /\.svg$/
+        }
+      }
+    },
     `gatsby-plugin-offline`
   ]
 }

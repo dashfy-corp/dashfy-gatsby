@@ -7,9 +7,11 @@ import '../assets/scss/paper-kit.scss'
 
 import Footer from './footer/Footer'
 import NavBar from './navbar/Navbar'
+import SEO from './seo'
 
 const Layout = ({ children }) => (
   <>
+    <SEO title="Home" />
     <NavBar />
     <div className="main">
       <main>{children}</main>

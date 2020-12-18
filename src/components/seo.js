@@ -71,12 +71,11 @@ function SEO({ description, lang, meta, title }) {
       link={[
         {
           href:
-            'https://fonts.googleapis.com/css?family=Montserrat:400,700,200',
+            'https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700',
           rel: 'stylesheet'
         },
         {
-          href:
-            'https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css',
+          href: 'https://use.fontawesome.com/releases/v5.7.1/css/all.css',
           rel: 'stylesheet'
         }
       ]}

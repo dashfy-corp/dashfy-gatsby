@@ -5,7 +5,10 @@ import {
   Button,
   CardBody,
   CardFooter,
-  CardTitle
+  CardTitle,
+  CardText,
+  CardImg,
+  CardImgOverlay
 } from 'reactstrap'
 import classNames from 'classnames'
 import { iconClassNames } from '../../untils'
@@ -30,33 +33,43 @@ const Card = ({
   title,
   subTitle,
   description,
+  overlay,
   action,
   buttons
 }) => (
   <BCard
     className={classNames({
-      card: true,
       'card-plain': plain,
       'card-profile': avatar !== null
     })}
   >
-    {avatar && (
-      <div className="card-avatar">
-        <LinkWrapped action={action}>
-          <Image alt={avatar.alt} src={avatar.src} />
-        </LinkWrapped>
-      </div>
-    )}
+    {avatar && <CardImg alt={avatar.alt} src={avatar.src} tag={Image} />}
 
-    <CardBody>
-      <LinkWrapped action={action}>
-        <div className="author">
+    {overlay && (
+      <CardImgOverlay>
+        <LinkWrapped action={action}>
           <CardTitle tag="h4">{title}</CardTitle>
           <h6 className="card-category">{subTitle}</h6>
-        </div>
-      </LinkWrapped>
-      <p className={`card-description text-${align}`}>{description}</p>
-    </CardBody>
+        </LinkWrapped>
+        <CardText className={`card-description text-${align}`}>
+          {description}
+        </CardText>
+      </CardImgOverlay>
+    )}
+
+    {!overlay && (
+      <CardBody>
+        <LinkWrapped action={action}>
+          <div className="author">
+            <CardTitle tag="h4">{title}</CardTitle>
+            <h6 className="card-category">{subTitle}</h6>
+          </div>
+        </LinkWrapped>
+        <CardText className={`card-description text-${align}`}>
+          {description}
+        </CardText>
+      </CardBody>
+    )}
 
     {buttons && buttons.length > 0 && (
       <CardFooter className={`text-${align}`}>
@@ -89,6 +102,7 @@ Card.propTypes = {
   title: PropTypes.string,
   subTitle: PropTypes.string,
   description: PropTypes.string,
+  overlay: PropTypes.bool,
   action: PropTypes.shape({
     title: PropTypes.string,
     url: PropTypes.string,

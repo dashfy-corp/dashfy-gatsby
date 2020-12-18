@@ -4,6 +4,7 @@ module.exports = {
   },
   env: {
     browser: true,
+    commonjs: true,
     node: true,
     jest: true
   },
@@ -11,6 +12,18 @@ module.exports = {
     react: {
       version: '16.13',
       flowVersion: '0.133.0'
+    },
+    "import/resolver": {
+      "alias": {
+        map: [
+          ["components", "./src/components"],
+          ["pages", "./src/pages"],
+          ["views", "./src/views"],
+          ["assets", "./src/assets"],
+          ["variables", "./src/variables"]
+        ],
+        extensions: ['.js', '.jsx', '.json']
+      }
     }
   },
   parser: 'babel-eslint',
@@ -23,9 +36,9 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:flowtype/recommended',
     'flowtype-essential',
-    'plugin:prettier/recommended'
+    'prettier'
   ],
-  plugins: ['import', 'react', 'jsx-a11y', 'flowtype', 'prettier'],
+  plugins: ['import', 'react', 'jsx-a11y', 'flowtype'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -33,6 +46,11 @@ module.exports = {
   },
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
-    'no-console': 0
+    'no-console': 0,
+    "react/no-unescaped-entities": ['off'],
+    "react/prop-types": ['warn'],
+    "react/no-string-refs": ['warn'],
+    "no-unused-vars": ['warn'],
   }
 }
+

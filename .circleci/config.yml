@@ -1,14 +1,19 @@
 version: 2.1
 
+parameters:
+  environment_context:
+    type: string
+    default: 'Dashfy App'
+
 restore_dependencies: &restore_dependencies
-  name: "Restoring dependencies from cache..."
+  name: 'Restoring dependencies from cache...'
   keys:
     - npm-deps-{{ checksum "package-lock.json" }}
 
 defaults: &defaults
   working_directory: ~/app
   docker:
-    - image: "circleci/node:10.16.0"
+    - image: 'circleci/node:10.16.0'
       auth:
         username: $DOCKERHUB_USERNAME
         password: $DOCKERHUB_PASSWORD
@@ -23,9 +28,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Installing dependencies..."
-          command: npm ci
-
+          name: 'Installing dependencies...'
+          command: npm i
       - save_cache:
           key: npm-deps-{{ checksum "package-lock.json" }}
           paths:
@@ -37,8 +41,10 @@ jobs:
       - checkout
       - restore_cache: *restore_dependencies
       - run:
-          name: "Linting..."
-          command: npm run lint
+          name: 'Linting...'
+          command: |
+            npm i
+            npm run lint
 
   test:
     <<: *defaults
@@ -46,8 +52,10 @@ jobs:
       - checkout
       - restore_cache: *restore_dependencies
       - run:
-          name: "Testing..."
-          command: npm run test
+          name: 'Testing...'
+          command: |
+            npm i
+            npm run test
 
   build:
     executor: gcp-gcr/default
@@ -74,25 +82,58 @@ jobs:
       - cloudrun/deploy:
           image: 'us.gcr.io/${GOOGLE_PROJECT_ID}/dashfy/frontend:latest'
           region: '${GOOGLE_COMPUTE_ZONE}'
-          service-name: dashfy-frontend
+          service-name: dashfy-frontend-${ENVIRONMENT}
 
 workflows:
-  deploy:
+  test:
     jobs:
       - preload:
-          context: Dashfy App
+          context: '<< pipeline.parameters.environment_context >>'
+          filters:
+            tags:
+              ignore: /.*/
+
       - lint:
           requires:
             - preload
+          filters:
+            tags:
+              ignore: /.*/
+
       - test:
+          context: '<< pipeline.parameters.environment_context >>'
+          requires:
+            - lint
+          filters:
+            tags:
+              ignore: /.*/
+
+  deploy:
+    jobs:
+      - preload:
+          context: '<< pipeline.parameters.environment_context >>'
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+
+      - build:
+          context: '<< pipeline.parameters.environment_context >>'
           requires:
             - preload
-            - lint
-      - build:
-          context: Dashfy App
-          requires:
-            - test
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+
       - deploy:
-          context: Dashfy App
+          context: '<< pipeline.parameters.environment_context >>'
           requires:
             - build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/

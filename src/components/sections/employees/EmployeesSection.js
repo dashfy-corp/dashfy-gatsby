@@ -5,7 +5,27 @@ import { darkModeTypes } from '../../../types'
 import Card from '../../card/Card'
 import Section from '../../section/Section'
 
-const AboutSection = ({ darkMode, title, description, action, employees }) => (
+/**
+ * Employees Section Component
+ *
+ * Custom section to display employees, each employee
+ * can have its own avatar along with name and position.
+ *
+ * @param darkMode
+ * @param title
+ * @param description
+ * @param action
+ * @param services
+ * @return {*}
+ * @constructor
+ */
+const EmployeesSection = ({
+  darkMode,
+  title,
+  description,
+  action,
+  employees
+}) => (
   <Section
     darkMode={darkMode}
     title={title || 'About'}
@@ -13,26 +33,25 @@ const AboutSection = ({ darkMode, title, description, action, employees }) => (
     action={action}
   >
     <>
-      {employees &&
-        employees
-          .map(employee => ({
-            ...employee,
-            subTitle: employee.position
-          }))
-          .map(employee => (
-            <Col
-              key={employee.id}
-              className="content-center"
-              md={employee.size || 6}
-            >
-              <Card {...employee} plain />
-            </Col>
-          ))}
+      {employees
+        .map(employee => ({
+          ...employee,
+          subTitle: employee.position
+        }))
+        .map(employee => (
+          <Col
+            key={employee.id}
+            className="content-center"
+            md={employee.size || 6}
+          >
+            <Card {...employee} plain />
+          </Col>
+        ))}
     </>
   </Section>
 )
 
-AboutSection.propTypes = {
+EmployeesSection.propTypes = {
   darkMode: darkModeTypes,
   title: PropTypes.string,
   description: PropTypes.string,
@@ -62,9 +81,9 @@ AboutSection.propTypes = {
   )
 }
 
-AboutSection.defaultProps = {
+EmployeesSection.defaultProps = {
   darkMode: false,
   employees: []
 }
 
-export default AboutSection
+export default EmployeesSection
