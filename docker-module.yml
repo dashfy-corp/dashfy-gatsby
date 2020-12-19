@@ -1,37 +1,41 @@
 development:
-  image: dashfy/dev-gatsby
-  env_file: .env
-  build:
-    context: ./modules/{MODULE_NAME}
-    args:
-      ENVIRONMENT: $ENVIRONMENT
-      UI_PORT: $UI_PORT
-  restart: unless-stopped
-  container_name: dashfy-dev-frontend
-  networks:
-    - dashfy-network
-  volumes:
-    - "./modules/{MODULE_NAME}/src:/usr/source/app/src"
-    - "./modules/{MODULE_NAME}/gatsby-browser.js:/usr/source/app/gatsby-browser.js"
-    - "./modules/{MODULE_NAME}/gatsby-config.js:/usr/source/app/gatsby-config.js"
-    - "./modules/{MODULE_NAME}/gatsby-node.js:/usr/source/app/gatsby-node.js"
-    - "./modules/{MODULE_NAME}/gatsby-ssr.js:/usr/source/app/gatsby-ssr.js"
-    - "./modules/{MODULE_NAME}/package.json:/usr/source/app/package.json"
-    - "./modules/{MODULE_NAME}/package-lock.json:/usr/source/app/package-lock.json"
-  ports:
-    - "$UI_PORT:$UI_PORT"
+  services:
+    {MODULE_NAME}:
+      image: dashfy/dev-{MODULE_NAME}
+      env_file: .env
+      build:
+        context: ./modules/{MODULE_NAME}
+        args:
+          ENVIRONMENT: $ENVIRONMENT
+          UI_PORT: $UI_PORT
+      restart: unless-stopped
+      container_name: dashfy-dev-{MODULE_NAME}
+      networks:
+        - dashfy-network
+      volumes:
+        - "./modules/{MODULE_NAME}/src:/usr/source/app/src"
+        - "./modules/{MODULE_NAME}/gatsby-browser.js:/usr/source/app/gatsby-browser.js"
+        - "./modules/{MODULE_NAME}/gatsby-config.js:/usr/source/app/gatsby-config.js"
+        - "./modules/{MODULE_NAME}/gatsby-node.js:/usr/source/app/gatsby-node.js"
+        - "./modules/{MODULE_NAME}/gatsby-ssr.js:/usr/source/app/gatsby-ssr.js"
+        - "./modules/{MODULE_NAME}/package.json:/usr/source/app/package.json"
+        - "./modules/{MODULE_NAME}/package-lock.json:/usr/source/app/package-lock.json"
+      ports:
+        - "$UI_PORT:$UI_PORT"
 
 production:
-  image: dashfy/frontend:latest
-  env_file: ./.env
-  build:
-    context: ./modules/{MODULE_NAME}
-    dockerfile: Dockerfile.prod
-  restart: unless-stopped
-  container_name: dashfy-{MODULE_NAME}
-  environment:
-    - HTTP_PORT=$UI_PORT
-  networks:
-    - dashfy-network
-  ports:
-    - "$UI_PORT:$UI_PORT"
+  services:
+    {MODULE_NAME}:
+      image: dashfy/{MODULE_NAME}:latest
+      env_file: .env
+      build:
+        context: ./modules/{MODULE_NAME}
+        dockerfile: Dockerfile.prod
+      restart: unless-stopped
+      container_name: dashfy-{MODULE_NAME}
+      environment:
+        - HTTP_PORT=$UI_PORT
+      networks:
+        - dashfy-network
+      ports:
+        - "$UI_PORT:$UI_PORT"
