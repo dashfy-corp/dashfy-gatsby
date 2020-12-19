@@ -1,4 +1,5 @@
 type: gatsby
+
 development:
   services:
     {MODULE_NAME}:
@@ -28,7 +29,6 @@ production:
   services:
     {MODULE_NAME}:
       image: dashfy/{MODULE_NAME}:latest
-      env_file: .env
       build:
         context: ./modules/{MODULE_NAME}
         dockerfile: Dockerfile.prod
