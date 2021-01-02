@@ -1,6 +1,6 @@
 {
     "name": "gatsby",
-    "type": "module",
+    "type": "gatsby",
     "title": "Gatsby",
     "category": "ui",
     "description": "Create blazing fast websites and apps AND harness the power of 2000+ plugins",
