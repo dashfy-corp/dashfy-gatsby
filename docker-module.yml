@@ -8,8 +8,8 @@ development:
       build:
         context: ./modules/{MODULE_NAME}
         args:
-          ENVIRONMENT: $ENVIRONMENT
-          UI_PORT: $UI_PORT
+          ENVIRONMENT: ${MODULE_NAME_UPPERCASE}_ENVIRONMENT
+          UI_PORT: ${MODULE_NAME_UPPERCASE}_UI_PORT
       restart: unless-stopped
       container_name: dashfy-dev-{MODULE_NAME}
       networks:
@@ -23,7 +23,7 @@ development:
         - "./modules/{MODULE_NAME}/package.json:/usr/source/app/package.json"
         - "./modules/{MODULE_NAME}/package-lock.json:/usr/source/app/package-lock.json"
       ports:
-        - "$UI_PORT:$UI_PORT"
+        - "$UI_PORT:${MODULE_NAME_UPPERCASE}_UI_PORT"
 
 production:
   services:
@@ -34,9 +34,7 @@ production:
         dockerfile: Dockerfile.prod
       restart: unless-stopped
       container_name: dashfy-{MODULE_NAME}
-      environment:
-        - HTTP_PORT=$UI_PORT
       networks:
         - dashfy-network
       ports:
-        - "$UI_PORT:$UI_PORT"
+        - "$UI_PORT:${MODULE_NAME_UPPERCASE}_UI_PORT"
