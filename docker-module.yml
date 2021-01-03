@@ -10,6 +10,12 @@ development:
         args:
           ENVIRONMENT: ${MODULE_NAME_UPPERCASE}_ENVIRONMENT
           UI_PORT: ${MODULE_NAME_UPPERCASE}_UI_PORT
+      environment:
+        UI_PORT: ${MODULE_NAME_UPPERCASE}_UI_PORT
+        UI_HOST: ${MODULE_NAME_UPPERCASE}_UI_HOST
+        API_URL: ${MODULE_NAME_UPPERCASE}_API_URL
+        API_IDENTIFIER: ${MODULE_NAME_UPPERCASE}_API_IDENTIFIER
+        API_PASSWORD: ${MODULE_NAME_UPPERCASE}_API_PASSWORD
       restart: unless-stopped
       container_name: dashfy-dev-{MODULE_NAME}
       networks:
@@ -23,7 +29,7 @@ development:
         - "./modules/{MODULE_NAME}/package.json:/usr/source/app/package.json"
         - "./modules/{MODULE_NAME}/package-lock.json:/usr/source/app/package-lock.json"
       ports:
-        - "$UI_PORT:${MODULE_NAME_UPPERCASE}_UI_PORT"
+        - "${MODULE_NAME_UPPERCASE}_UI_PORT:${MODULE_NAME_UPPERCASE}_UI_PORT"
 
 production:
   services:
@@ -32,9 +38,15 @@ production:
       build:
         context: ./modules/{MODULE_NAME}
         dockerfile: Dockerfile.prod
+      environment:
+        UI_PORT: ${MODULE_NAME_UPPERCASE}_UI_PORT
+        UI_HOST: ${MODULE_NAME_UPPERCASE}_UI_HOST
+        API_URL: ${MODULE_NAME_UPPERCASE}_API_URL
+        API_IDENTIFIER: ${MODULE_NAME_UPPERCASE}_API_IDENTIFIER
+        API_PASSWORD: ${MODULE_NAME_UPPERCASE}_API_PASSWORD
       restart: unless-stopped
       container_name: dashfy-{MODULE_NAME}
       networks:
         - dashfy-network
       ports:
-        - "$UI_PORT:${MODULE_NAME_UPPERCASE}_UI_PORT"
+        - "${MODULE_NAME_UPPERCASE}_UI_PORT:${MODULE_NAME_UPPERCASE}_UI_PORT"
